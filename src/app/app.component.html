@@ -1,11 +1,8 @@
-<style>
-</style>
-
-
-<form action="">
-    <label >Datei hochladen</label>
-    <input type="file">
-    <button type="submit">upload</button>
+<form (submit)="onSubmit($event)">
+    <label for="file-upload">Datei hochladen</label>
+    <input type="file" id="file-upload" (change)="onFileSelected($event)" multiple>
+    <button type="submit" [disabled]="!selectedFiles.length">Upload</button>
 </form>
+  
 
 <router-outlet />
