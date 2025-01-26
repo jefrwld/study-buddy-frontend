@@ -42,8 +42,8 @@ export class AppComponent {
       );
     }
   }
-  responseMessage = "";
-  displayMessage: boolean = false;
+  responseMessage = "error: please try later again";
+  displayMessage: boolean = true;
   displayUploadResponseMessage(uploadStatus:boolean): void{
     this.displayMessage = true;
     if(uploadStatus = true){
@@ -54,5 +54,12 @@ export class AppComponent {
     setTimeout(() => {
       this.displayMessage = false;
     }, 3000);
+  }
+
+  showLoadingAnimation: boolean = false;
+  displayLoadingAnimation(){
+    while(this.responseMessage == ""){
+      this.showLoadingAnimation = true;
+    }
   }
 }

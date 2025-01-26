@@ -10,11 +10,11 @@
             <button class="upload-form-button" type="submit" [disabled]="!selectedFiles.length">Upload</button>
         </div>
         </div>
+        <div *ngIf="this.displayMessage"  class="response-message-container">
+            <p *ngIf="this.uploadStatus == true" class="response-message-success">{{this.responseMessage}}</p>
+            <p *ngIf="this.uploadStatus == false" class="response-message-failure">{{this.responseMessage}}</p>
+        </div>
     </form>
-    <div *ngIf="this.displayMessage"  class="response-message-container">
-        <p *ngIf="this.uploadStatus == true" class="response-message-success">{{this.responseMessage}}</p>
-        <p *ngIf="this.uploadStatus == false" class="response-message-failure">{{this.responseMessage}}</p>
-    </div>
 </div>
   
 <router-outlet />
