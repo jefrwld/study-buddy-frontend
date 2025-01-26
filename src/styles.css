@@ -8,9 +8,6 @@
     text-align: center;
 }
 
-.upload-form {
-}
-
 .upload-input {
     display: none;
 }
@@ -18,8 +15,10 @@
 
 .upload-form-group {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     margin-top: 10px;
+    align-items: center;
 }
 .upload-input-label {
     display: inline-block;
@@ -28,6 +27,7 @@
     border: none;
     border: 2px solid black;
     font-family: monospace;
+    width: fit-content;
   }
 
   .upload-form-button {
@@ -36,6 +36,8 @@
     border: none;
     border: 2px solid black;
     font-family: monospace;
+    text-align: center;
+    margin-top: 10px;
   }
   
   .upload-input-label:hover{
