@@ -42,8 +42,8 @@ export class AppComponent {
       );
     }
   }
-  responseMessage = "error: please try later again";
-  displayMessage: boolean = true;
+  responseMessage = "";
+  displayMessage: boolean = false;
   displayUploadResponseMessage(uploadStatus:boolean): void{
     this.displayMessage = true;
     if(uploadStatus = true){
