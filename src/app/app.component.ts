@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NotedApiService } from './noted-api.service';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import {Question} from './interfaces';
+import {Question} from './types';
 
 @Component({
   selector: 'app-root',
