@@ -1,14 +1,28 @@
-<h2>Quiz Questions:</h2>
-
-
-
 <form action="">
-    <div class="">
-           <p>{{questions()[0].question}}</p> 
-           <div *ngFor(questions of questions()[0].question) class="formgroup">
-            <label for="">{{questions}}</label>
-            <input type="checkbox" name="test" id="">
-           </div>
+    <div *ngFor="let question of questions(); let i = index">
+      <div class="question-card">
+        <p>{{ question.question }}</p>  <!-- Frage anzeigen -->
+  
+        <!-- Antwortmöglichkeiten anzeigen -->
+        <div *ngFor="let option of ['A', 'B', 'C', 'D']">
+          <div class="formgroup">
+            <label for="">{{ question[option] }}</label>
+            <input 
+              type="radio" 
+              name="question{{i}}" 
+              [value]="option"
+              (change)="checkAnswer(i, option)"  
+            >
+          </div>
+        </div>
+  
+        <!-- Feedback anzeigen -->
+        <div *ngIf="selectedAnswers[i]">
+          <p *ngIf="selectedAnswers[i] === question.correct">Correct!</p>
+          <p *ngIf="selectedAnswers[i] !== question.correct">Incorrect!</p>
+        </div>
+      </div>
     </div>
-
-</form>
+  </form>
+  
+  
