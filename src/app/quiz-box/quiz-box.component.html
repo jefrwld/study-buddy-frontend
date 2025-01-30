@@ -1,6 +1,14 @@
 <h2>Quiz Questions:</h2>
-<ul>
-  <li *ngFor="let question of questions()">
-    {{ question }}
-  </li>
-</ul>
+
+
+
+<form action="">
+    <div class="">
+           <p>{{questions()[0].question}}</p> 
+           <div *ngFor(questions of questions()[0].question) class="formgroup">
+            <label for="">{{questions}}</label>
+            <input type="checkbox" name="test" id="">
+           </div>
+    </div>
+
+</form>
