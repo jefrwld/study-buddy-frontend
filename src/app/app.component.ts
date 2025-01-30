@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { NotedApiService } from './noted-api.service';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { QuizBoxComponent } from './quiz-box/quiz-box.component';
 import {Question} from './types';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, QuizBoxComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
