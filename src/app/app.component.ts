@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Signal, signal } from '@angular/core';
 import { NotedApiService } from './noted-api.service';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -16,7 +16,7 @@ import {Question} from './types';
 
 export class AppComponent {
   selectedFiles: File[] = [];
-  quizzQuestions: Question[] = [];
+  quizzQuestions = signal<any[]>([]);
   constructor(private notedApiService: NotedApiService) {}
 
   onFileSelected(event: Event): void {
@@ -37,8 +37,8 @@ export class AppComponent {
           console.log('Upload erfolgreich:', response);  
           this.uploadStatus = true;
           this.displayUploadResponseMessage(this.uploadStatus);
-          this.quizzQuestions = response.questions;
-          console.log(this.quizzQuestions);
+          this.quizzQuestions.set(response.questions);
+          console.log(response.questions);
         },
         error => {
           console.error('Upload fehlgeschlagen:', error);
