@@ -1,29 +1,33 @@
 import { Input, Component, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
 @Component({
   selector: 'app-quiz-box',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './quiz-box.component.html',
   styleUrl: './quiz-box.component.css'
 })
-
-
 export class QuizBoxComponent {
   @Input({ required: true }) questions!: Signal<any[]>;
 
-  selectedAnswers: any[] = [];  // Speichert die Antworten des Benutzers
+  selectedAnswers: any[] = []; 
   visibleQuestion: number = 0;
 
-  // Vergleiche die Antworten und gib Feedback
   checkAnswer(questionIndex: number, selectedAnswer: string) {
     const correctAnswer = this.questions()[questionIndex].correct;
+
+    this.selectedAnswers[questionIndex] = selectedAnswer;
+
     if (selectedAnswer === correctAnswer) {
-      this.visibleQuestion=questionIndex;
-      alert('Correct!');
+      if (this.visibleQuestion < this.questions().length - 1) {
+        this.visibleQuestion++;
+      } else {
+        alert('Quiz Completed! 🎉');
+      }
     } else {
-      alert('Incorrect!');
+      alert('Incorrect! Try again.');
     }
   }
 }
+
