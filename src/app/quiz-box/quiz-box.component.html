@@ -5,7 +5,7 @@
 
       <div *ngFor="let option of ['A', 'B', 'C', 'D']">
         <div class="formgroup">
-          <label>{{ question[option] }}</label>
+          <label class="question-option">{{ question[option] }}</label>
           <input 
             type="radio" 
             name="question{{i}}" 
