@@ -3,6 +3,7 @@ import { NotedApiService } from './noted-api.service';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { QuizBoxComponent } from './quiz-box/quiz-box.component';
+
 import {Question} from './types';
 
 @Component({
@@ -17,6 +18,7 @@ import {Question} from './types';
 export class AppComponent {
   selectedFiles: File[] = [];
   quizzQuestions = signal<any[]>([]);
+  showSpinner: boolean = false;
   constructor(private notedApiService: NotedApiService) {}
 
   onFileSelected(event: Event): void {
@@ -29,15 +31,15 @@ export class AppComponent {
   uploadStatus: boolean = false;
   onSubmit(event: Event): void {
     event.preventDefault();
-
     if (this.selectedFiles.length > 0) {
+      this.showSpinner = true;
       this.notedApiService.uploadFiles(this.selectedFiles).subscribe(
-
         response => {
           console.log('Upload erfolgreich:', response);  
           this.uploadStatus = true;
           this.displayUploadResponseMessage(this.uploadStatus);
           this.quizzQuestions.set(response.questions);
+          this.showSpinner = false;
           console.log(response.questions);
         },
         error => {
@@ -60,12 +62,5 @@ export class AppComponent {
     setTimeout(() => {
       this.displayMessage = false;
     }, 3000);
-  }
-
-  showLoadingAnimation: boolean = false;
-  displayLoadingAnimation(){
-    while(this.responseMessage == ""){
-      this.showLoadingAnimation = true;
-    }
   }
 }
