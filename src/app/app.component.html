@@ -6,9 +6,12 @@
         <div class="upload-form-group">
             <label class="upload-input-label" for="file-upload">choose</label>
             <input class="upload-input" type="file" id="file-upload" (change)="onFileSelected($event)" multiple>
-        <div class="button-wrapper">
+        <div class="button-wrapper" *ngIf="!this.showSpinner">
             <button class="upload-form-button" type="submit" [disabled]="!selectedFiles.length">Upload</button>
         </div>
+        <div class="spinner-overlay" *ngIf="this.showSpinner">
+            <div class="spinner"></div>
+          </div>
         </div>
         <div *ngIf="this.displayMessage"  class="response-message-container">
             <p *ngIf="this.uploadStatus == true" class="response-message-success">{{this.responseMessage}}</p>
