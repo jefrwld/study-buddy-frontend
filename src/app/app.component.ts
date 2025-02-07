@@ -17,8 +17,16 @@ export class AppComponent {
   selectedFiles: File[] = [];
   quizzQuestions = signal<any[]>([]);
   showSpinner: boolean = false;
+  options: boolean = false;
+  flashcardHandler: boolean = false;
+  markdownHandler: boolean = false;
+  response: any = "";
   constructor(private notedApiService: NotedApiService) {}
 
+
+  showOptions(){
+    this.options = !this.options;
+  }
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
 
@@ -34,6 +42,7 @@ export class AppComponent {
       this.notedApiService.uploadFiles(this.selectedFiles).subscribe(
         response => {
           console.log('Upload erfolgreich:', response);  
+          this.response = response;
           this.uploadStatus = true;
           this.displayUploadResponseMessage(this.uploadStatus);
           this.quizzQuestions.set(response.questions);
@@ -60,5 +69,19 @@ export class AppComponent {
     setTimeout(() => {
       this.displayMessage = false;
     }, 3000);
+  }
+
+
+  downloadMarkdown() {
+    const markdownContent = this.response.results[0].markdownContent;  // Inhalt aus dem JSON-Response
+    const blob = new Blob([markdownContent], { type: 'text/markdown' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Personal_Introduction.md';  // Name der Datei
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
   }
 }

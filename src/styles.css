@@ -74,12 +74,28 @@
   }
 
   .spinner {
+    margin-top: 10px;
     border: 8px solid #f3f3f3;
     border-top: 8px solid #3498db;
     border-radius: 50%;
     width: 20px;
     height: 20px;
     animation: spin 1s linear infinite;
+  }
+
+  .options-formgroup{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30%;
+    padding: 10px;
+  }
+
+  .option-formgroup-element{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
   }
   
   @keyframes spin {

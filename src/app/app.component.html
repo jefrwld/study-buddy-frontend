@@ -18,12 +18,9 @@
             <p *ngIf="this.uploadStatus == false" class="response-message-failure">{{this.responseMessage}}</p>
         </div>
     </form>
-
-
-
-    <!-- Quiz Section  -->
     <app-quiz-box [questions]="quizzQuestions">
     </app-quiz-box>
+    <button (click)="downloadMarkdown()">Markdown-Datei herunterladen</button>
 </div>
   
 <router-outlet />
