@@ -1,3 +1,4 @@
-export interface ImageInterpretation {
-   text: ""; 
-}
+ export interface UploadResponse {
+   results: { markdownContent: string }[];
+   questions: any[];
+ }

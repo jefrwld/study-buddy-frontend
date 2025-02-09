@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { QuizBoxComponent } from './quiz-box/quiz-box.component';
 import { FormsModule } from '@angular/forms'; 
-
+import {UploadResponse} from './response-interfaces';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,6 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './app.component.css'
 })
 
-
 export class AppComponent {
   selectedFiles: File[] = [];
   quizzQuestions = signal<any[]>([]);
@@ -22,14 +21,12 @@ export class AppComponent {
   showSpinner: boolean = false;
   showMarkdown: boolean = false;
   options: boolean = false;
-  flashcardHandler: boolean = false;
-  markdownHandler: boolean = false;
   response: any = "";
   markdownContent: string = '';  
   editableMarkdown: string = '';
   quizzFinished: boolean = false;
 
-  constructor(private notedApiService: NotedApiService) {}
+  constructor(private readonly notedApiService: NotedApiService) {}
 
 
   showOptions(){
@@ -47,6 +44,8 @@ export class AppComponent {
   onQuizCompleted(completed: boolean){
     this.quizzFinished = completed;
   }
+
+
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
 
@@ -54,37 +53,46 @@ export class AppComponent {
       this.selectedFiles = Array.from(input.files);
     }
   }
+
+
   uploadStatus: boolean = false;
   onSubmit(event: Event): void {
     event.preventDefault();
-    if (this.selectedFiles.length > 0) {
-      this.showSpinner = true;
-      this.notedApiService.uploadFiles(this.selectedFiles).subscribe(
-        response => {
-          console.log('Upload erfolgreich:', response);  
-          this.markdownContent = response.results[0].markdownContent;
-          this.editableMarkdown = this.markdownContent;
-          this.response = response;
-          this.uploadStatus = true;
-          this.displayUploadResponseMessage(this.uploadStatus);
-          this.quizzQuestions.set(Array.isArray(response.questions) ? response.questions : Object.values(response.questions));
-
-          this.showSpinner = false;
-          console.log(response.questions);
-        },
-        error => {
-          console.error('Upload fehlgeschlagen:', error);
-          this.uploadStatus = false;
-          this.displayUploadResponseMessage(this.uploadStatus);
-        }
-      );
-    }
+    if (this.selectedFiles.length === 0) return;
+  
+    this.startUpload();
   }
+  
+  private startUpload(): void {
+    this.showSpinner = true;
+    
+    this.notedApiService.uploadFiles(this.selectedFiles).subscribe(
+      response => this.handleUploadSuccess(response),
+      error => this.handleUploadError(error)
+    );
+  }
+  
+  private handleUploadSuccess(response: UploadResponse): void {
+    this.markdownContent = response.results[0].markdownContent;
+    this.editableMarkdown = this.markdownContent;
+    this.response = response;
+    this.uploadStatus = true;
+    this.displayUploadResponseMessage(true);
+    this.quizzQuestions.set(Array.isArray(response.questions) ? response.questions : Object.values(response.questions));
+    this.showSpinner = false;
+  }
+  
+  private handleUploadError(error: any): void {
+    this.uploadStatus = false;
+    this.displayUploadResponseMessage(false);
+  }
+
+  
   responseMessage = "";
   displayMessage: boolean = false;
   displayUploadResponseMessage(uploadStatus:boolean): void{
     this.displayMessage = true;
-    if(uploadStatus = true){
+    if(uploadStatus){
       this.responseMessage = 'sucessfully generated file';
     } else {
       this.responseMessage = 'error: please try later again'
@@ -95,15 +103,14 @@ export class AppComponent {
   }
 
 
-  downloadEditedMarkdown() {
+  downloadEditedMarkdown(): void {
     const blob = new Blob([this.editableMarkdown], { type: 'text/markdown' });
-    const url = window.URL.createObjectURL(blob);
+    const url = URL.createObjectURL(blob);
+    
     const a = document.createElement('a');
     a.href = url;
     a.download = 'Edited_Markdown.md';
-    document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
+    URL.revokeObjectURL(url);
   }
 }
