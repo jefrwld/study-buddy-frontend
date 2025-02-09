@@ -20,6 +20,13 @@
                 <label for="">Markdowneditor</label>
                 <input (click)="showMarkdownEditor()" type="checkbox" name="" id="">
             </div>
+            <div class="slide">
+                <div class="slide-text">
+                    <span class="slide-text-element">generate </span>
+                    <span> {{slideValue}} questions</span>
+                </div>
+                <input type="range" min="0" max="15" name="" id="" [(ngModel)]="slideValue">
+            </div>
         </div>
     </div>
     <form class="upload-form" (submit)="onSubmit($event)">
@@ -35,10 +42,10 @@
             <div class="spinner"></div>
           </div>
         </div>
-        <div *ngIf="this.displayMessage"  class="response-message-container">
+        <!-- <div *ngIf="this.displayMessage"  class="response-message-container">
             <p *ngIf="this.uploadStatus == true" class="response-message-success">{{this.responseMessage}}</p>
             <p *ngIf="this.uploadStatus == false" class="response-message-failure">{{this.responseMessage}}</p>
-        </div>
+        </div> -->
     </form>
     <app-quiz-box *ngIf="showQuizQuestions" [questions]="quizzQuestions">
     </app-quiz-box>

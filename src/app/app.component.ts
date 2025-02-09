@@ -25,6 +25,7 @@ export class AppComponent {
   markdownContent: string = '';  
   editableMarkdown: string = '';
   quizzFinished: boolean = false;
+  slideValue: number = 3;
 
   constructor(private readonly notedApiService: NotedApiService) {}
 
@@ -66,7 +67,7 @@ export class AppComponent {
   private startUpload(): void {
     this.showSpinner = true;
     
-    this.notedApiService.uploadFiles(this.selectedFiles).subscribe(
+    this.notedApiService.uploadFiles(this.selectedFiles, this.slideValue).subscribe(
       response => this.handleUploadSuccess(response),
       error => this.handleUploadError(error)
     );
