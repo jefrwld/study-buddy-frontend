@@ -1,18 +1,14 @@
 
 
 <div class="main-container">
-
     <div class="nav">
         <h1 class="heading">Study Buddy 👨‍💻 </h1>
         <div class="menue">
-
             <div (click)="showOptions()" class="menu-icon-wrapper">
                 <i class="fa-solid fa-gear"></i>
             </div>
         </div>
     </div>
-
-
     <div class="options-wrapper">
         <div *ngIf="this.options" class="options">
             <span>enable...</span>
@@ -26,10 +22,6 @@
             </div>
         </div>
     </div>
-
-
-
-
     <form class="upload-form" (submit)="onSubmit($event)">
         <div class="upload-form-group">
             <label class="upload-input-label" for="file-upload">choose</label>
@@ -39,7 +31,6 @@
                     <i class="fa-solid fa-upload"></i>
                 </button>
             </div>
-            
         <div class="spinner-overlay" *ngIf="this.showSpinner">
             <div class="spinner"></div>
           </div>
@@ -53,12 +44,9 @@
     </app-quiz-box>
     <div *ngIf="uploadStatus">
         <textarea *ngIf="showMarkdown" class="generated-text" [(ngModel)]="editableMarkdown" rows="10" cols="80"></textarea>
-        
     </div>
-      
     <div class="download-button-wrapper">
         <button class="download-button" (click)="downloadEditedMarkdown()">Speichern & Download</button>
     </div>
 </div>
-  
 <router-outlet />
