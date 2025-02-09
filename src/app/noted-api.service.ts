@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root', // Stellt den Service global bereit
@@ -13,6 +13,11 @@ export class NotedApiService {
   uploadFiles(files: File[]): Observable<any> {
     const formData = new FormData();
     files.forEach(file => formData.append('file[]', file, file.name));
-    return this.http.post(`${this.baseUrl}/upload`, formData);
+    return this.http.post(`${this.baseUrl}/upload`, formData).pipe(
+      catchError(error => {
+        console.log("Upload fehlgeschlagen..", error);
+        return throwError(() => new Error('Fehler beim Hochladen der Datei'));
+      })
+    )
   }
 }
