@@ -2,7 +2,7 @@
 
 <div class="main-container">
     <div class="nav">
-        <h1 class="heading">Study Buddy 👨‍💻 </h1>
+        <h1 class="heading">Study Buddy 👨‍💻</h1>
         <div class="menue">
             <div (click)="showOptions()" class="menu-icon-wrapper">
                 <i class="fa-solid fa-gear"></i>
@@ -13,11 +13,11 @@
         <div *ngIf="this.options" class="options">
             <span>enable...</span>
             <div class="options-formelement">
-                <label for="">Quizquestions</label>
+                <label for="">Quiz Mode</label>
                 <input (click)="showQuiz()" type="checkbox" name="" id="">
             </div>
             <div class="options-formelement">
-                <label for="">Markdowneditor</label>
+                <label for="">Markdown Editor</label>
                 <input (click)="showMarkdownEditor()" type="checkbox" name="" id="">
             </div>
             <div class="slide">
@@ -53,7 +53,7 @@
         <textarea *ngIf="showMarkdown" class="generated-text" [(ngModel)]="editableMarkdown" rows="10" cols="80"></textarea>
     </div>
     <div class="download-button-wrapper">
-        <button class="download-button" (click)="downloadEditedMarkdown()">Speichern & Download</button>
+        <button class="download-button" (click)="downloadEditedMarkdown()">save & download</button>
     </div>
 </div>
 <router-outlet />
