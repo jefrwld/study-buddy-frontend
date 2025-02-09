@@ -9,6 +9,16 @@
         <div class="button-wrapper" *ngIf="!this.showSpinner">
             <button class="upload-form-button" type="submit" [disabled]="!selectedFiles.length">Upload</button>
         </div>
+        <div class="options">
+            <div class="options-formelement">
+                <label for="">Enable Quizquestions</label>
+                <input (click)="showQuiz()" type="checkbox" name="" id="">
+            </div>
+            <div class="options-formelement">
+                <label for="">Enable Markdowneditor</label>
+                <input (click)="showMarkdownEditor()" type="checkbox" name="" id="">
+            </div>
+        </div>
         <div class="spinner-overlay" *ngIf="this.showSpinner">
             <div class="spinner"></div>
           </div>
@@ -18,10 +28,10 @@
             <p *ngIf="this.uploadStatus == false" class="response-message-failure">{{this.responseMessage}}</p>
         </div>
     </form>
-    <app-quiz-box [questions]="quizzQuestions">
+    <app-quiz-box *ngIf="showQuizQuestions" [questions]="quizzQuestions">
     </app-quiz-box>
     <div *ngIf="uploadStatus">
-        <textarea class="generated-text" [(ngModel)]="editableMarkdown" rows="10" cols="80"></textarea>
+        <textarea *ngIf="showMarkdown" class="generated-text" [(ngModel)]="editableMarkdown" rows="10" cols="80"></textarea>
         
         <button (click)="downloadEditedMarkdown()">Speichern & Download</button>
     </div>

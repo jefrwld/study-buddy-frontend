@@ -18,7 +18,9 @@ import { FormsModule } from '@angular/forms';
 export class AppComponent {
   selectedFiles: File[] = [];
   quizzQuestions = signal<any[]>([]);
+  showQuizQuestions: boolean = false;
   showSpinner: boolean = false;
+  showMarkdown: boolean = false;
   options: boolean = false;
   flashcardHandler: boolean = false;
   markdownHandler: boolean = false;
@@ -32,6 +34,14 @@ export class AppComponent {
 
   showOptions(){
     this.options = !this.options;
+  }
+
+  showQuiz(){
+    this.showQuizQuestions = !this.showQuizQuestions;
+  }
+
+  showMarkdownEditor(){
+    this.showMarkdown = !this.showMarkdown;
   }
 
   onQuizCompleted(completed: boolean){
