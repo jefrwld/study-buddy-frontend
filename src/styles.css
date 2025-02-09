@@ -1,11 +1,16 @@
 .main-container {
-    width: 33%;
+    width: 40%;
     margin: 0 auto;
 }
 
 .heading {
     font-family: monospace;
-    text-align: center;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid black;
 }
 
 .upload-input {
