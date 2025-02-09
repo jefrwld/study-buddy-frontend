@@ -67,7 +67,8 @@ export class AppComponent {
           this.response = response;
           this.uploadStatus = true;
           this.displayUploadResponseMessage(this.uploadStatus);
-          this.quizzQuestions.set(response.questions);
+          this.quizzQuestions.set(Array.isArray(response.questions) ? response.questions : Object.values(response.questions));
+
           this.showSpinner = false;
           console.log(response.questions);
         },

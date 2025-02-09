@@ -5,7 +5,25 @@
     <div class="nav">
         <h1 class="heading">Study Buddy</h1>
         <div class="menue">
-            <i class="fa-solid fa-gear"></i>
+
+            <div (click)="showOptions()" class="menu-icon-wrapper">
+                <i class="fa-solid fa-gear"></i>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="options-wrapper">
+        <div *ngIf="this.options" class="options">
+            <span>enable...</span>
+            <div class="options-formelement">
+                <label for="">Quizquestions</label>
+                <input (click)="showQuiz()" type="checkbox" name="" id="">
+            </div>
+            <div class="options-formelement">
+                <label for="">Markdowneditor</label>
+                <input (click)="showMarkdownEditor()" type="checkbox" name="" id="">
+            </div>
         </div>
     </div>
 
@@ -18,17 +36,6 @@
             <input class="upload-input" type="file" id="file-upload" (change)="onFileSelected($event)" multiple>
         <div class="button-wrapper" *ngIf="!this.showSpinner">
             <button class="upload-form-button" type="submit" [disabled]="!selectedFiles.length">Upload</button>
-        </div>
-        <div class="options">
-            <span>enable...</span>
-            <div class="options-formelement">
-                <label for="">Quizquestions</label>
-                <input (click)="showQuiz()" type="checkbox" name="" id="">
-            </div>
-            <div class="options-formelement">
-                <label for="">Markdowneditor</label>
-                <input (click)="showMarkdownEditor()" type="checkbox" name="" id="">
-            </div>
         </div>
         <div class="spinner-overlay" *ngIf="this.showSpinner">
             <div class="spinner"></div>
