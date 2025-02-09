@@ -34,9 +34,12 @@
         <div class="upload-form-group">
             <label class="upload-input-label" for="file-upload">choose</label>
             <input class="upload-input" type="file" id="file-upload" (change)="onFileSelected($event)" multiple>
-        <div class="button-wrapper" *ngIf="!this.showSpinner">
-            <button class="upload-form-button" type="submit" [disabled]="!selectedFiles.length">Upload</button>
-        </div>
+            <div class="button-wrapper" *ngIf="!showSpinner">
+                <button class="upload-form-button" type="submit" [disabled]="!selectedFiles.length">
+                    <i class="fa-solid fa-upload"></i>
+                </button>
+            </div>
+            
         <div class="spinner-overlay" *ngIf="this.showSpinner">
             <div class="spinner"></div>
           </div>
@@ -51,10 +54,11 @@
     <div *ngIf="uploadStatus">
         <textarea *ngIf="showMarkdown" class="generated-text" [(ngModel)]="editableMarkdown" rows="10" cols="80"></textarea>
         
-        <button (click)="downloadEditedMarkdown()">Speichern & Download</button>
     </div>
       
-
+    <div class="download-button-wrapper">
+        <button class="download-button" (click)="downloadEditedMarkdown()">Speichern & Download</button>
+    </div>
 </div>
   
 <router-outlet />

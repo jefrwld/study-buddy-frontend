@@ -25,10 +25,10 @@
 
 .upload-form-group {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     margin-top: 10px;
     align-items: center;
+    padding-bottom: 25px;
 }
 .upload-input-label {
     display: inline-block;
@@ -47,9 +47,9 @@
     border: 2px solid black;
     font-family: monospace;
     text-align: center;
-    margin-top: 10px;
     background-color: white;
     color: black;
+    margin-left: 10px;
   }
   
   .upload-input-label:hover{
@@ -117,6 +117,29 @@
     border: 3px solid black;
     font-family: monospace;
     margin-top: 20px;
+    width: 99%;
+  }
+
+  .download-button {
+    all: unset;
+    background-color: rgb(31, 35, 255);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: 40%;
+    text-align: center;
+    font-size: 12px;
+    font-family: monospace;
+    cursor: pointer;
+  }
+
+  .download-button:hover {
+    background-color: rgb(31, 72, 255);
+  }
+  .download-button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
   
   @keyframes spin {
