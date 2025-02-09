@@ -10,12 +10,13 @@
             <button class="upload-form-button" type="submit" [disabled]="!selectedFiles.length">Upload</button>
         </div>
         <div class="options">
+            <span>enable...</span>
             <div class="options-formelement">
-                <label for="">Enable Quizquestions</label>
+                <label for="">Quizquestions</label>
                 <input (click)="showQuiz()" type="checkbox" name="" id="">
             </div>
             <div class="options-formelement">
-                <label for="">Enable Markdowneditor</label>
+                <label for="">Markdowneditor</label>
                 <input (click)="showMarkdownEditor()" type="checkbox" name="" id="">
             </div>
         </div>

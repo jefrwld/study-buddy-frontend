@@ -83,19 +83,20 @@
     animation: spin 1s linear infinite;
   }
 
-  .options-formgroup{
+  .options {
+    border: 2px solid black;
+    width: 35%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 30%;
-    padding: 10px;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 15px;
+     
   }
-
-  .option-formgroup-element{
-    width: 100%;
+  .options-formelement{
     display: flex;
     justify-content: space-between;
-    margin-top: 5px;
   }
 
   .generated-text {
