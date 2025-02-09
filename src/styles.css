@@ -26,7 +26,7 @@
 .upload-form-group {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 70px;
     align-items: center;
     padding-bottom: 25px;
 }
@@ -38,6 +38,7 @@
     border: 2px solid black;
     font-family: monospace;
     width: fit-content;
+    cursor:pointer;
   }
 
   .upload-form-button {
@@ -50,6 +51,7 @@
     background-color: white;
     color: black;
     margin-left: 10px;
+    cursor: pointer;
   }
   
   .upload-input-label:hover{
@@ -88,9 +90,10 @@
     border: 8px solid #f3f3f3;
     border-top: 8px solid #3498db;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     animation: spin 1s linear infinite;
+    margin-bottom: 11px; 
   }
 
   .options {
@@ -137,6 +140,7 @@
     background-color: rgb(31, 72, 255);
   }
   .download-button-wrapper {
+    margin-top: 50px;
     width: 100%;
     display: flex;
     justify-content: center;
