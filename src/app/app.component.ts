@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { QuizBoxComponent } from './quiz-box/quiz-box.component';
 import {Question} from './types';
+import { MarkdownModule } from 'ngx-markdown';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -21,6 +22,7 @@ export class AppComponent {
   flashcardHandler: boolean = false;
   markdownHandler: boolean = false;
   response: any = "";
+  markdownContent: string = '';
   constructor(private notedApiService: NotedApiService) {}
 
 
@@ -42,6 +44,7 @@ export class AppComponent {
       this.notedApiService.uploadFiles(this.selectedFiles).subscribe(
         response => {
           console.log('Upload erfolgreich:', response);  
+          this.markdownContent = response.results[0].markdownContent;
           this.response = response;
           this.uploadStatus = true;
           this.displayUploadResponseMessage(this.uploadStatus);

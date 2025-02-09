@@ -20,6 +20,9 @@
     </form>
     <app-quiz-box [questions]="quizzQuestions">
     </app-quiz-box>
+    <p>
+        {{this.markdownContent}}
+    </p>
     <button (click)="downloadMarkdown()">Markdown-Datei herunterladen</button>
 </div>
   
