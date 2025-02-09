@@ -3,12 +3,13 @@ import { NotedApiService } from './noted-api.service';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { QuizBoxComponent } from './quiz-box/quiz-box.component';
-import {Question} from './types';
-import { MarkdownModule } from 'ngx-markdown';
+import { FormsModule } from '@angular/forms'; 
+
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, QuizBoxComponent],
+  imports: [RouterOutlet, CommonModule, QuizBoxComponent, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -22,12 +23,19 @@ export class AppComponent {
   flashcardHandler: boolean = false;
   markdownHandler: boolean = false;
   response: any = "";
-  markdownContent: string = '';
+  markdownContent: string = '';  
+  editableMarkdown: string = '';
+  quizzFinished: boolean = false;
+
   constructor(private notedApiService: NotedApiService) {}
 
 
   showOptions(){
     this.options = !this.options;
+  }
+
+  onQuizCompleted(completed: boolean){
+    this.quizzFinished = completed;
   }
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -45,6 +53,7 @@ export class AppComponent {
         response => {
           console.log('Upload erfolgreich:', response);  
           this.markdownContent = response.results[0].markdownContent;
+          this.editableMarkdown = this.markdownContent;
           this.response = response;
           this.uploadStatus = true;
           this.displayUploadResponseMessage(this.uploadStatus);
@@ -75,13 +84,12 @@ export class AppComponent {
   }
 
 
-  downloadMarkdown() {
-    const markdownContent = this.response.results[0].markdownContent;  // Inhalt aus dem JSON-Response
-    const blob = new Blob([markdownContent], { type: 'text/markdown' });
+  downloadEditedMarkdown() {
+    const blob = new Blob([this.editableMarkdown], { type: 'text/markdown' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'Personal_Introduction.md';  // Name der Datei
+    a.download = 'Edited_Markdown.md';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

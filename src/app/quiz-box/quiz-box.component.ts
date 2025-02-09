@@ -1,4 +1,4 @@
-import { Input, Component, Signal } from '@angular/core';
+import { Input, Component, Signal, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class QuizBoxComponent {
   @Input({ required: true }) questions!: Signal<any[]>;
+  @Output() quizCompleted = new EventEmitter<boolean>();
 
   selectedAnswers: any[] = []; 
   visibleQuestion: number = 0;
@@ -24,6 +25,7 @@ export class QuizBoxComponent {
         this.visibleQuestion++;
       } else {
         alert('Quiz Completed! 🎉');
+        this.quizCompleted.emit(true); 
       }
     } else {
       alert('Incorrect! Try again.');
